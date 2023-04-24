@@ -6,23 +6,26 @@ export const GifExpertApp = () => {
     "Nanatsu no Taizai",
   ]);
 
-  const onAddCategory = () => {
-    setCategories([...categories, 'Jujutsu'])
+  const onAddCategory = (newCategory) => {
+    if (categories.includes(newCategory)) return;
+
+    setCategories([newCategory, ...categories]);
   };
 
   return (
     <>
       <h1>GifExpertApp</h1>
 
-    <AddCategory/>
+      <AddCategory
+        //setCategories={setCategories}
+        onNewCategory={(value) => onAddCategory(value)}
+      />
 
-      <button onClick={onAddCategory}>Agregar</button>
       <ol>
         {categories.map((category) => {
           return <li key={category}>{category}</li>;
         })}
       </ol>
-      
     </>
   );
 };
